@@ -1,0 +1,26 @@
+﻿Krajse SEA SHEPERD od ChatGPTja kr js nimam casa to brat:
+
+
+Navodila za igro:
+
+Cilj igre: Cilj igre je poiskati vse skrite kitolovce na vsaki stopnji in jih nato potopiti, da bi rešili kite.
+
+Stopnje igre: Igra vsebuje 3 stopnje. Vsaka stopnja se razlikuje po:
+velikosti mreže, številu nasprotnikov, in področju, na katerem se igra odvija (npr. Antarktika, Severno morje, Južno kitajsko morje). Težavnost se postopoma povečuje z vsako stopnjo.
+
+Glavni protagonist - Igralec: Igralec, ki ga nadzoruje igralec, se prikaže v naključnem polju na začetku igre. Igralec se lahko premika v vseh smereh po mreži, sledi nasprotnikom in jih uničuje.
+
+Kitolovci - Nasprotniki: Kitolovci so nasprotniki, ki so naključno postavljeni na mreži in skriti, dokler se ne prikaže namig o njihovi lokaciji.
+Ko se namig odkrije ali ko se igralec približa dovolj blizu, postanejo kitolovci vidni, in igralec se lahko premakne, da se dotakne in potopi kitolovce.
+
+Ledeni grebeni / atoli: Na začetku vsake stopnje se naključno postavijo ledene gore ali atoli na mrežo. Ti so sprva nevidni, vendar se pokažejo,
+ko igralec pride na določeno oddaljenost od njih. Če se igralec dotakne ledene gore ali atola, lahko to vpliva na igralčevo energijo ali ga onesposobi za določen čas.
+
+Namigi: Igralec lahko dobi namig o lokaciji kitolovca bodisi preko satelitske povezave, kjer se izpiše sporočilo s koordinatami nasprotnika, ali pa naključno med igro.
+
+Posebne situacije: Če se vsaj dva kitolovca postavita drug poleg drugega, postane nemogoče uničiti enega ali oba, saj nas obstreljujejo z različnim orožjem. 
+V takih primerih igralec se lahko odmakne in počaka, da se nasprotnika razdelita.
+
+Dodatni izzivi: Na posameznih stopnjah se lahko pojavi tudi dodatna vprašanja, na katera mora igralec odgovoriti, preden lahko nadaljuje naprej. Ta vprašanja se odkrijejo, ko igralec stopi na določeno polje.
+
+To so osnovna navodila za igro, ki opisujejo glavne komponente in delovanje vsake od njih.
