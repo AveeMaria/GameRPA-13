@@ -24,11 +24,19 @@ Replay::Replay(const char* texturesheet, float x, float y)
 //vpise koordinato za playerja zdj
 void Replay::ReplaySave(SDL_Rect a)
 {
-    datao.open(filename, std::ios::binary|std::ios::ate);
+    datao.open(filename, std::ios::binary|std::ios::app);
 
     if (!datao.is_open()) { std::cout << "output file not open\n"; return; }
 
     datao.write((char*)&a, sizeof a);
+
+    datao.close();
+}
+
+void Replay::ClearReplay() {
+    datao.open(filename, std::ios::binary);
+
+    if (!datao.is_open()) { std::cout << "failed to clear file\n"; return; }
 
     datao.close();
 }

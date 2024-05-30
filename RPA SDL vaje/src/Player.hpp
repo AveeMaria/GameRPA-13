@@ -18,6 +18,7 @@ private:
 	
 	bool immortalMode = false;
 
+	bool sui = false;
 	bool facingright = true;
 
 	SDL_Texture* TargetLocation = TextureManager::LoadTexture("/assets/x.png");
@@ -50,7 +51,7 @@ public:
 	int getRenderDistance() { return RenderDST; }
 
 	//se ubije
-	void KYS() { hp = 0; }
+	void KYS() { hp = 0; sui = true; }
 
 	void Addscore(int s) { score += s; }
 	int GetScore() { return score; }
@@ -61,6 +62,8 @@ public:
 	void moveTowardsCoords(float, float, Map*);
 
 	void ToggleImmortalMode() { immortalMode = !immortalMode; }
+
+	bool getSui() { return sui; }
 
 	//preveri collision
 	bool collision(SDL_Rect);

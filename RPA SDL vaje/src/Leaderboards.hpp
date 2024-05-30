@@ -2,9 +2,25 @@
 
 #include "Game.hpp"
 
-void ReadLeaderboards(const char* filename);
+struct Zapis {
+	char name[16];
+	int score;
+	Zapis() {}
+	Zapis(const char* pn, int s) { strcpy_s(name, pn); score = s; }
+};
 
-int VrniVrstico(const char* filename, const char* iskanTXT);
+class Leaderboards {
+private:
+	const char* filename = "leaderboards.bin";
+public:
+	Leaderboards() { filename = "leaderboards.bin"; }
 
-void WriteSortedLeaderboards(const char* filename, std::string newString, int score);
+	//void VpisIgralec(Igralec& a);
+	//Igralec MakeIgralec(const char* pname, int pscore);
 
+	void IzpisDatoteke();
+
+	void SortiranVpis(Zapis a);
+
+	void DeleteRecords();//spuca file
+};

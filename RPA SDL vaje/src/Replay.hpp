@@ -13,7 +13,7 @@ private:
 
 	std::ofstream datao;
 	std::ifstream datai;
-	
+
 	//SDL_Texture* TargetLocation = TextureManager::LoadTexture("/assets/x.png");
 public:
 	Replay(const char* texturesheet, float x, float y);
@@ -22,10 +22,13 @@ public:
 
 	//zacne recordat playermovment
 	void ReplaySave(SDL_Rect);
-
+	void ClearReplay();
 	//neha recordat playermovement
 	void StopReplay();
-	
+
+	void ToggleReplay(bool ON) { replayOn = ON; }
+	bool GetReplay() { return replayOn; }//sam za slucaj nvm ce rabm
+
 	//vrne un rectangle k ga player uzame al neki?
 	SDL_Rect GetReplayPos();
 

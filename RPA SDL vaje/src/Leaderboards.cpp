@@ -1,80 +1,70 @@
-#pragma once
-
 #include "Game.hpp"
+#include "Leaderboards.hpp"
+#include "Utils.hpp"
 
-void ReadLeaderboards(const char* filename) {
-	std::ifstream datai(filename);
+void Leaderboards::IzpisDatoteke() {
+    std::ifstream datai(filename, std::ios::binary);
+    if (datai.is_open()) {
+        std::cout << "LEADERBOARDS:\n";
+        Zapis x;
+        //izpisemo vse iz fila
+        while (datai.read((char*)&x, sizeof(x))) {
+            std::cout << "player:" <<x.name << "\nscore:" << x.score << "\n";
+        }
+        datai.close();
+    }
+    else {
+        std::cout << "file not open\n";
+    }
+}
+/*
+Zapis Leaderboard::MakeZapis(const char* pname,int pscore) {
+    return Zapis(pname,pscore);
+}*/
 
-	if (!datai.is_open()) {
-		std::ofstream datao(filename);
-		std::ifstream datai(filename);
-	}
+void Leaderboards::SortiranVpis(Zapis a) {
+    std::ifstream datai(filename, std::ios::binary);
+    std::ofstream datao("tmp.bin", std::ios::binary);
 
-	if (datai.is_open()) {
-		{
-			std::string s;
-			while (std::getline(datai, s)) {
-				std::cout << s << "\n";
-			}
-		}
-		datai.close();
-	}
-	else {
-		std::cout << "file not open\n";
-	}
+    //to je ce se ni fila zato da ga ustvari da ne joka
+    if (datai.is_open() == false) {
+        std::ofstream nardimofile(filename, std::ios::binary);
+        datai.open(filename, std::ios::binary);
+        nardimofile.close();
+    }
+
+    //prever da ni prazna in da je ze vpisu novga Zapisa
+    bool neki = false;
+    Zapis b;//tega preberemo
+
+    if ((datai.is_open()) && (datao.is_open())) {
+        //prebere celo dat
+        while (datai.read((char*)&b, sizeof(b))) {
+            //ce je vecji ga zapisemo prej
+            if (a.score > b.score && neki == false) {
+                datao.write((char*)&a, sizeof(a));
+                neki = true;
+            }
+            //v vsakem primeru prepisemo b v tmp.bin
+            datao.write((char*)&b, sizeof(b));
+        }
+        //ce je prazna dat se while ne izvede in zapise na prvo mesto
+        if (neki == false) {
+            datao.write((char*)&a, sizeof(a));
+        }
+        datai.close();
+        datao.close();
+    }
+
+    //deletamo staro dat, preimenujemo tmp v ime stare datoteke
+    remove(filename);
+    rename("tmp.bin", filename);
 }
 
-int VrniVrstico(const char* filename, const char* iskanTXT) {
-	std::ifstream datai(filename, std::ios::app);
-	if (datai.is_open()) {
-		int st_vrstice = 0;
-		{
-			std::string s;
-			while (getline(datai, s)) {
-				++st_vrstice;
-				if (s == iskanTXT) {
-					break;
-				}
-			}
-		}
-		return st_vrstice;
-		datai.close();
-	}
-	else {
-		std::cout << "file not open\n";
-	}
-	return 0;
-}
-
-void WriteSortedLeaderboards(const char* filename, std::string newString, int score) {
-	std::ifstream currFile(filename, std::ios::app);
-	std::ofstream tmpFile("tmp.txt");
-
-	if (currFile.is_open() && tmpFile.is_open()) {
-		std::string line;
-		bool inserted = false;
-
-		while (getline(currFile, line)) {
-			//najde presledek da loh preberestevilo
-			if (!inserted && score > std::stoi(line.substr(0, line.find(" ")))) {
-				tmpFile << score << " " << newString << "\n";
-				inserted = true;
-			}
-
-			tmpFile << line << "\n";
-		}
-
-		if (!inserted) {
-			tmpFile << score << " " << newString << "\n";
-		}
-
-		currFile.close();
-		tmpFile.close();
-
-		remove(filename);
-		rename("tmp.txt", filename);
-	}
-	else {
-		std::cout << "File not open\n";
-	}
+void Leaderboards::DeleteRecords()
+{
+    //std::ofstream datao("leaderboards.bin", std::ios::binary);
+    std::ofstream datao(filename, std::ios::binary);
+    if (!datao.is_open()) { std::cout << "failed to clear file\n"; return; }
+    datao.close();
 }

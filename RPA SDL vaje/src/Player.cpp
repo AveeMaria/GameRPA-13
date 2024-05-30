@@ -15,7 +15,7 @@ void Player::ReplayMode(Replay* r) {
 
     //k je konc replaya returna 0 0 0 0 rectangle
     while (!(destRect.w == 0 || destRect.h == 0)) {
-        SDL_RenderClear(Game::renderer);//riskiy bisky
+        SDL_RenderClear(Game::renderer);//riskiy bisky stuff
         destRect = r->GetReplayPos();
 
         xpos = destRect.x;

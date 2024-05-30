@@ -12,7 +12,7 @@
 #include "Deathscreen.hpp"
 #include "Atol.hpp"
 #include "Replay.hpp"
-//#include "Leaderboards.hpp"
+#include "Leaderboards.hpp"
 
 Player* player;
 
@@ -21,6 +21,8 @@ Cursor* cursor;
 
 Titlescreen* titlescreen;
 Deathscreen* deathscreen;
+
+Leaderboards* leaderboards;
 
 std::vector<Whaler*> Kitolovci;
 
@@ -47,9 +49,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	int flags = 0;
 
 	//damo ime playerja
-	//std::cout << "enter player name: ";
-	//std::cin >> playername;
+	std::cout << "enter player name: ";
+	std::cin >> playername;
 	
+	//leaderboards->DeleteRecords();//spuca cel file
+
 	if (fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -66,12 +70,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
 		isRunning = true;
 	}
+
+	leaderboards = new Leaderboards();
 	replay = new Replay();
 	cursor = new Cursor();
 	player = new Player("assets/player.png", 0, 0);
 	map = new Map();
 	titlescreen = new Titlescreen();
 	deathscreen = new Deathscreen();
+	
 	SpawnIcebergs(); SpawnKitolovci();
 }
 
@@ -139,6 +146,8 @@ void Game::handleEvents() {
 	//kys mode
 	if (currentKeyStates[SDL_SCANCODE_X]) {
 		if (!titlescreen->GetVisible()) {
+			targetX = (float)0;
+			targetY = (float)0;
 			player->KYS();
 		}
 	}
@@ -163,6 +172,10 @@ void Game::handleEvents() {
 	}
 	if (currentKeyStates[SDL_SCANCODE_I]) {
 		player->ToggleImmortalMode();
+	}
+	//izpise leaderboards
+	if (currentKeyStates[SDL_SCANCODE_L]) {
+		leaderboards->IzpisDatoteke();
 	}
 		
 	//player gre nekam
@@ -224,10 +237,20 @@ void Game::update() {
 
 	//ce je player mrtev
 	if (!player->alive()) {
-		//isRunning = false;
 		//k player umre narise deathscreen
+
+		if (player->getSui()) {
+			leaderboards->SortiranVpis(Zapis{ playername,player->GetScore() /* / (int)cnt */ });//vpise score in playjerja
+		}
+		leaderboards->IzpisDatoteke();//izpise leaderboards
 		deathscreen->SetVisible(true);return;
-	}//trentuno gameenda, drgac klice death screen
+	}
+	//ce je ziv player
+	else {
+		replay->ReplaySave(player->GetPlayerRect());//recorda playerja not
+
+	}
+	//trentuno gameenda, drgac klice death screen
 	
 	player->Update();
 	cursor->Update();
@@ -244,7 +267,7 @@ void Game::update() {
 			//detecta collision z playerjem
 			if (player->collision(i->GetIcebergRect())) {
 				player->takeDamage(25);
-				player->Addscore(-50);
+				player->Addscore(-25);
 				std::cout << "player collided with ID: " << i->ReturnID() << "\n";
 				LedeneGore.erase(it);
 				break;
@@ -273,6 +296,7 @@ void Game::update() {
 			if (EnemyIcebergCollided) {
 				break;
 			}*/
+			
 		}
 	}
 
@@ -327,7 +351,8 @@ void Game::update() {
 		if (player->collision(a->GetAtolRect())) {
 			std::cout << "Player collided with whaler\n";
 			player->takeDamage(25);
-			//player->Addscore(-50);
+			player->Addscore(-25);
+			//player->Addscore(player->GetScore());//score na 0
 			Atoli.erase(it);
 			break;
 		}
@@ -338,7 +363,7 @@ void Game::update() {
 
 void Game::render() {
 	++cnt;
-	std::cout << cnt << "\n";
+	//std::cout << cnt << "\n";
 
 	SDL_RenderClear(renderer);
 	//ne rise stvari ce je naslovnica odprta
@@ -348,8 +373,9 @@ void Game::render() {
 		return;
 	}
 
-	//ne rise stvari ce je deathscreen on
+	//ne rise stvari ce je deathscreen on=playermrtev
 	if (deathscreen->GetVisible()) {
+		player->ReplayMode(replay);
 		deathscreen->Render();
 		SDL_RenderPresent(renderer);
 		return;
@@ -394,7 +420,7 @@ void Game::render() {
 }
 
 void Game::clean() {
-	std::cout << "\nscore: " << (int) player->GetScore() / cnt << "\n";
+	//std::cout << "\nscore: " << (int) player->GetScore() / cnt << "\n";
 	//Leaderboards::WriteSortedLeaderboards("leaderboard.txt", playername, score);
 
 	SDL_DestroyWindow(window);
