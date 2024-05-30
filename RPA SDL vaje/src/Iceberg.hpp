@@ -35,5 +35,5 @@ public:
     void izpis();
     void Render();
     void Update();
-    int ReturnID() { return ID; } // vrne ID
+    int ReturnID() { return ID; } //vrne ID
 };

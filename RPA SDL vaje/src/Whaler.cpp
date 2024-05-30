@@ -126,7 +126,7 @@ void Whaler::move(Map* map) {
         break;
     case Direction::Left:
         if (xpos - 1 >= 0) {
-            tempRect = { destRect.x - 1, destRect.y, destRect.w, destRect.h }; // Fixed
+            tempRect = { destRect.x - 1, destRect.y, destRect.w, destRect.h };
             if (!map->LandCollision(tempRect)) {
                 xpos -= 1;
             }
@@ -134,7 +134,7 @@ void Whaler::move(Map* map) {
         break;
     case Direction::Right:
         if (xpos + 1 < 800) {
-            tempRect = { destRect.x + 1, destRect.y, destRect.w, destRect.h }; // Fixed
+            tempRect = { destRect.x + 1, destRect.y, destRect.w, destRect.h };
             if (!map->LandCollision(tempRect)) {
                 xpos += 1;
             }

@@ -65,7 +65,7 @@ void Player::increaseY(float y)
 void Player::drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius) {
     for (int i = 0; i < 360; ++i) {
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);//rdec circle
-        double angle = i * M_PI / 180; // Convert degrees to radians
+        double angle = i * M_PI / 180;
         int x = centerX + (int)(radius * cos(angle));
         int y = centerY + (int)(radius * sin(angle));
         SDL_RenderDrawPoint(renderer, x, y);
@@ -170,7 +170,7 @@ void Player::moveTowardsCoords(float PlayerPosX, float PlayerPosY, Map* map) {
 
     //preveri da negremo izven okna
     if (tempX >= 0 && tempX + srcRect.w <= 800 && tempY >= 0 && tempY + srcRect.h <= 600) {
-        // preveri land collision
+        //preveri land collision
         if (!map->LandCollision(playerDestRect)) {
             xpos = tempX;
             ypos = tempY;

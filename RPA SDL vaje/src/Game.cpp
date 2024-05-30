@@ -201,7 +201,7 @@ void Game::handleEvents() {
 		}
 	}
 
-	// Move towards the target coordinates
+	//player gre do teh coordov
 	if (targetX - 25 != -1 && targetY - 25 != -1) {
 		cursor->setXY(targetX - 25, targetY - 25);
 		if (!keyboardMovement) {

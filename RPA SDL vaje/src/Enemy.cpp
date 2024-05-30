@@ -16,7 +16,7 @@ void Enemy::Update()
 //narise krog okol enemyja (idk da vids range v F3 nacinu)
 void Enemy::drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius) {
     for (int i = 0; i < 360; ++i) {
-        double angle = i * M_PI / 180; // Convert degrees to radians
+        double angle = i * M_PI / 180;
         int x = centerX + (int)(radius * cos(angle));
         int y = centerY + (int)(radius * sin(angle));
         SDL_RenderDrawPoint(renderer, x, y);
@@ -65,7 +65,7 @@ void Enemy::moveTowardsPlayer(float PlayerPosX, float PlayerPosY, Map* map) {
 
     //preveri da negre enemy izven okna
     if (tempX >= 0 && tempX + srcRect.w <= 800 && tempY >= 0 && tempY + srcRect.h <= 600) {
-        // preveri land collision
+        //preveri land collision
         if (!map->LandCollision(enemyDestRect)) {
             xpos = tempX;
             ypos = tempY;
