@@ -28,8 +28,6 @@ public:
 	Whaler(const char* texturesheet, float x, float y);
 	Whaler();
 
-	//void moveTowardsPlayer(float, float);
-
 	bool alive() { return hp > 0; }
 
 	int getTriggerDistance() { return triggerDistance; }
@@ -40,7 +38,7 @@ public:
 
 	void move(Map*);
 
-	//bezi stran al neki? 
+	//bezi stran
 	void moveAwayFromPlayer(float, float, Map*);
 
 	SDL_Rect GetWhalerRect() { return destRect; }

@@ -36,16 +36,6 @@ void Enemy::Render()
     }
 }
 
-/*
-void drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius) {
-    for (int i = 0; i < 360; ++i) {
-        double angle = i * M_PI / 180; // Convert degrees to radians
-        int x = centerX + (int)(radius * cos(angle));
-        int y = centerY + (int)(radius * sin(angle));
-        SDL_RenderDrawPoint(renderer, x, y);
-    }
-}*/
-
 void Enemy::moveTowardsPlayer(float PlayerPosX, float PlayerPosY, Map* map) {
     float dx = PlayerPosX - xpos;
     float dy = PlayerPosY - ypos;
@@ -56,18 +46,12 @@ void Enemy::moveTowardsPlayer(float PlayerPosX, float PlayerPosY, Map* map) {
     //zracuna distanco
     float distance = sqrt(dx * dx + dy * dy);
 
-    //std::cout << "distance: "<< distance << "\n";
-
     float dxNormalized = dx / distance;
     float dyNormalized = dy / distance;
 
     //da ne trippa zard floatov in ne premika enemyja ce je predalec od playerja
     if (distance <= 1 || (distance > triggerDistance && distance > triggerDistance + 50)) { return; }
-    /*
-    if (distance > 100.0) {
-        // If the player is too far away, do not chase
-        return;
-    }*/
+    
 
     float tempX = xpos + speed * dxNormalized;
     float tempY = ypos + speed * dyNormalized;
@@ -97,14 +81,9 @@ Enemy::Enemy(const char* texturesheet, float x, float y)
 }
 
 Enemy::Enemy() {
-    //srand(time(NULL));
     ID = rand()%900000+100000;
     xpos = (float)(rand() % 16 * 50);
     ypos = (float)(rand() % 12 * 50);
-    /*
-    ID = rand() % 900000 + 100000;
-    xpos = (float)(rand() % 16) * 50;
-    ypos = (float)(rand() % 12) * 50;*/
 }
 
 void Enemy::takeDamage(int dmg) {

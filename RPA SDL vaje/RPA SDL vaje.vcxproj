@@ -78,9 +78,11 @@
     <Image Include="assets\x.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="leaderboards.bin" />
     <None Include="libpng16-16.dll" />
     <None Include="navodila\DODATNE_ZAHTEVE_ZA_IGRICO.docx" />
     <None Include="navodila\Sea-Shepherd-Rules.docx" />
+    <None Include="replay.bin" />
     <None Include="SDL2.dll" />
     <None Include="SDL2_image.dll" />
     <None Include="TODO.md" />

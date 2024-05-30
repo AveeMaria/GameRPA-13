@@ -23,11 +23,6 @@ public:
 	Enemy(const char* texturesheet, float x, float y);
 	Enemy();
 
-	//void moveTowardsPlayer(float, float);
-
-	//prever se collision da se ne indentificira kt letalo
-	//void moveTowardsPlayer(bool collided, float PlayerPosX, float PlayerPosY);
-
 	bool alive() { return hp > 0; }
 
 	void takeDamage(int);

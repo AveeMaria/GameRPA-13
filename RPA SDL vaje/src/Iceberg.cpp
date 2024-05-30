@@ -49,31 +49,7 @@ void Iceberg::Update()
     destRect.y = (int)ypos;
     destRect.w = srcRect.w;
     destRect.h = srcRect.h;
-
-    /*
-    if (rand() % 2) {
-        short a = 0;
-        a=rand() % 3 - 1;
-        if (xpos <= WINDOW_WIDTH) {
-            if (xpos + 2*a > WINDOW_WIDTH - srcRect.w)
-                xpos = (float) WINDOW_WIDTH - srcRect.w;
-            else if (xpos + 2 *a < 0)
-                xpos = 0;
-            else xpos += 2 *a;
-        }
-    }
-    if (rand() % 2) {
-        short a = 0;
-        a = rand() % 3 - 1;
-        if (ypos <= WINDOW_HEIGHT) {
-            if (ypos + 2 * a > WINDOW_HEIGHT - srcRect.h)
-                ypos = (float) WINDOW_HEIGHT - srcRect.h;
-            else if (ypos + 2 * a < 0)
-                ypos = 0;
-            else ypos += 2 * a;
-        }
-    }*/
-}
+   }
 
 void Iceberg::izpis()
 {
@@ -88,40 +64,14 @@ void Iceberg::Render()
         SDL_RenderDrawRect(Game::renderer, &destRect);
     }
 }
-/*
-// to je treba fixnt
-void Iceberg::moveIceberg(int& direction) {
-    static int i = 0; 
 
-    if (i >= 10) {
-        direction = rand() % 4; // 0: up, 1: down, 2: left, 3: right
-        i = 0; // Reset i to 0 after changing direction
-    }
-
-    switch (direction) {
-    case 0:
-        
-        break;
-    case 1:
-        //enemyRect.y++;
-        break;
-    case 2:
-        //enemyRect.x--;
-        break;
-    case 3:
-        //enemyRect.x++;
-        break;
-    }
-
-    i++; // Increment i by 1
-}*/
+//skopiran movment od unga Whalerja
 void Iceberg::move(Map* map) {
     if (counter == 100) {
-        counter = 0; // Reset the counter
+        counter = 0;
         currentDirection = static_cast<Direction>(std::rand() % 4);
     }
 
-    // Move according to the current direction
     switch (currentDirection) {
         SDL_Rect tempRect;
     case Direction::Up:
@@ -142,7 +92,7 @@ void Iceberg::move(Map* map) {
         break;
     case Direction::Left:
         if (xpos - 1 >= 0) {
-            tempRect = { destRect.x - 1, destRect.y, destRect.w, destRect.h }; // Fixed
+            tempRect = { destRect.x - 1, destRect.y, destRect.w, destRect.h };
             if (!map->LandCollision(tempRect)) {
                 xpos -= 1;
             }
@@ -150,7 +100,7 @@ void Iceberg::move(Map* map) {
         break;
     case Direction::Right:
         if (xpos + 1 < 800) {
-            tempRect = { destRect.x + 1, destRect.y, destRect.w, destRect.h }; // Fixed
+            tempRect = { destRect.x + 1, destRect.y, destRect.w, destRect.h };
             if (!map->LandCollision(tempRect)) {
                 xpos += 1;
             }

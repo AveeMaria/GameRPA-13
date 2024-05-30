@@ -22,7 +22,7 @@ protected:
 	SDL_Texture* objTexture;
 
 	//TODO: idk poprav to
-	SDL_Rect targetRect, targetDestRect;
+	//SDL_Rect targetRect, targetDestRect;
 
 	SDL_Rect srcRect, destRect;
 	

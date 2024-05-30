@@ -16,7 +16,6 @@ private:
     static int counter;
 
     Direction currentDirection;
-    //bool showHitboxes = false;
 public:
     //random x,y
     Iceberg();

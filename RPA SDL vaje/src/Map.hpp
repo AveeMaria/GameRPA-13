@@ -32,14 +32,10 @@ private:
 	int tilesize = 25;
 	int m = 24; int n = 32;
 
-	//int map[15][20] za tilesize = 40;
-	//int map[24][32] za tilesize = 25;
 
 public:
 	Map();
 	~Map();
-
-	//void LevelReloadTextures(int n);
 
 	//da zamenjamo lvl?
 	void LoadMapLVLselect(int n);

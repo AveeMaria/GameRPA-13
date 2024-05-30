@@ -16,7 +16,7 @@ void Whaler::Update()
 //narise krog okol Whalerja (idk da vids range v F3 nacinu)
 void Whaler::drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius) {
     for (int i = 0; i < 360; ++i) {
-        double angle = i * M_PI / 180; // Convert degrees to radians
+        double angle = i * M_PI / 180;
         int x = centerX + (int)(radius * cos(angle));
         int y = centerY + (int)(radius * sin(angle));
         SDL_RenderDrawPoint(renderer, x, y);
@@ -36,26 +36,22 @@ void Whaler::Render()
     }
 }
 
+//to je skopiran od PlayerMovementa
 void Whaler::moveAwayFromPlayer(float PlayerPosX, float PlayerPosY, Map* map) {
     float dx = PlayerPosX - xpos;
     float dy = PlayerPosY - ypos;
 
-    // Calculate the angle
     float angle = atan2(dy, dx);
 
-    // Calculate the distance
     float distance = sqrt(dx * dx + dy * dy);
 
-    // Normalize the direction vector
     float dxNormalized = dx / distance;
     float dyNormalized = dy / distance;
 
-    // Check if the player is too far away or too close
     if (distance > 100.0 || distance <= 1 || (distance > triggerDistance && distance > triggerDistance + 50)) {
-        return; // Do not move if too far or too close
+        return;
     }
 
-    // Calculate the new position
     float tempX = xpos - speed * dxNormalized;
     float tempY = ypos - speed * dyNormalized;
 
@@ -66,7 +62,6 @@ void Whaler::moveAwayFromPlayer(float PlayerPosX, float PlayerPosY, Map* map) {
         srcRect.h
     };
 
-    // Check if the new position is within the game window and doesn't collide with land
     if (tempX >= 0 && tempX + srcRect.w <= 800 && tempY >= 0 && tempY + srcRect.h <= 600) {
         if (!map->LandCollision(WhalerDestRect)) {
             xpos = tempX;
@@ -107,11 +102,10 @@ void Whaler::izpis()
 
 void Whaler::move(Map* map) {
     if (counter == 100) {
-        counter = 0; // Reset the counter
+        counter = 0; //reseta kaunter
         currentDirection = static_cast<Direction>(std::rand() % 4);
     }
 
-    // Move according to the current direction
     switch (currentDirection) {
         SDL_Rect tempRect;
     case Direction::Up:

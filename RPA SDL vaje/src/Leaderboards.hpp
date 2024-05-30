@@ -15,10 +15,8 @@ private:
 public:
 	Leaderboards() { filename = "leaderboards.bin"; }
 
-	//void VpisIgralec(Igralec& a);
-	//Igralec MakeIgralec(const char* pname, int pscore);
-
 	void IzpisDatoteke();
+	void Izpis5ih();
 
 	void SortiranVpis(Zapis a);
 

@@ -13,7 +13,7 @@ private:
 	int RenderDST = 250;
 
 	int score = 0;
-
+	bool replayed = false;
 	float speed = 1.2f;
 	
 	//bool ReplayOn = false;
@@ -32,7 +32,7 @@ public:
 	void moveUp();
 	void moveDown();
 
-	void ReplayMode(Replay*);
+	void ReplayMode(Replay*,Map*);
 
 	void increaseX(float);
 	void increaseY(float);

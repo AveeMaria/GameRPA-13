@@ -175,7 +175,7 @@ void Game::handleEvents() {
 	}
 	//izpise leaderboards
 	if (currentKeyStates[SDL_SCANCODE_L]) {
-		leaderboards->IzpisDatoteke();
+		leaderboards->Izpis5ih();
 	}
 		
 	//player gre nekam
@@ -212,17 +212,15 @@ void Game::update() {
 
 	if (deathscreen->GetVisible()) {
 		//ce je prvi gumb je respawn
-		if (deathscreen->CheckButtonClick(targetX, targetY)==1) {
+		if (deathscreen->CheckButtonClick(targetX, targetY) == 1) {
 			//std::cout << "button 2 clicked\n";
 
 			deathscreen->SetVisible(false);
 			map->LoadMapLVLselect(1);
 			SpawnIcebergs();
-			
-			//player->SetHealth(100);
 		}
 		//ce je drugi je titlescreen
-		else if(deathscreen->CheckButtonClick(targetX, targetY)==2) {
+		else if (deathscreen->CheckButtonClick(targetX, targetY) == 2) {
 			//std::cout << "button 2 clicked\n";
 
 			titlescreen->SetVisible(true);
@@ -242,7 +240,7 @@ void Game::update() {
 		if (player->getSui()) {
 			leaderboards->SortiranVpis(Zapis{ playername,player->GetScore() /* / (int)cnt */ });//vpise score in playjerja
 		}
-		leaderboards->IzpisDatoteke();//izpise leaderboards
+		leaderboards->Izpis5ih();//izpise leaderboards
 		deathscreen->SetVisible(true);return;
 	}
 	
@@ -251,11 +249,6 @@ void Game::update() {
 	player->Update();
 	cursor->Update();
 	
-	/*
-	if (map->LandCollision(player->GetPlayerRect())) {
-		std::cout << cnt << "collided\n"; ++cnt;
-	}*/
-
 	//Player-Iceberg //in Whaler-Iceberg Collision
 	if (map->GetcurrLvl() == 1) {
 		for (auto it = LedeneGore.begin(); it != LedeneGore.end(); ++it) {
@@ -292,7 +285,6 @@ void Game::update() {
 			if (EnemyIcebergCollided) {
 				break;
 			}*/
-			
 		}
 	}
 
@@ -371,7 +363,7 @@ void Game::render() {
 
 	//ne rise stvari ce je deathscreen on=playermrtev
 	if (deathscreen->GetVisible()) {
-		player->ReplayMode(replay);
+		player->ReplayMode(replay,map);
 		deathscreen->Render();
 		SDL_RenderPresent(renderer);
 		return;

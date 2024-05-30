@@ -187,6 +187,12 @@
     <None Include="TODO.md" />
     <None Include="navodila\DODATNE_ZAHTEVE_ZA_IGRICO.docx" />
     <None Include="navodila\Sea-Shepherd-Rules.docx" />
+    <None Include="leaderboards.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="replay.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="SDL2.lib" />

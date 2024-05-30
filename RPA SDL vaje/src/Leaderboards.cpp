@@ -17,10 +17,25 @@ void Leaderboards::IzpisDatoteke() {
         std::cout << "file not open\n";
     }
 }
-/*
-Zapis Leaderboard::MakeZapis(const char* pname,int pscore) {
-    return Zapis(pname,pscore);
-}*/
+
+
+void Leaderboards::Izpis5ih() {
+    std::ifstream datai(filename, std::ios::binary);
+    if (datai.is_open()) {
+        std::cout << "LEADERBOARDS:\n";
+        Zapis x;
+        int i = 0;
+        //izpisemo vse iz fila
+        while (datai.read((char*)&x, sizeof(x)) && i < 5) {
+            ++i;
+            std::cout << "player:" << x.name << "\nscore:" << x.score << "\n";
+        }
+        datai.close();
+    }
+    else {
+        std::cout << "file not open\n";
+    }
+}
 
 void Leaderboards::SortiranVpis(Zapis a) {
     std::ifstream datai(filename, std::ios::binary);
@@ -63,7 +78,6 @@ void Leaderboards::SortiranVpis(Zapis a) {
 
 void Leaderboards::DeleteRecords()
 {
-    //std::ofstream datao("leaderboards.bin", std::ios::binary);
     std::ofstream datao(filename, std::ios::binary);
     if (!datao.is_open()) { std::cout << "failed to clear file\n"; return; }
     datao.close();
