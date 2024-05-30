@@ -9,6 +9,7 @@
 #include <cstring>
 #include <cmath>
 #include <fstream>
+#include <filesystem>
 
 
 class Game
@@ -30,6 +31,8 @@ public:
 	void SpawnGusarji();
 	void SpawnAtoli();
 	void SpawnKitolovci();
+
+	
 
 	void NextLevel();
 

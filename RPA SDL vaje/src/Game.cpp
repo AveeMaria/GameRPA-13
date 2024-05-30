@@ -52,7 +52,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	std::cout << "enter player name: ";
 	std::cin >> playername;
 	
-	//leaderboards->DeleteRecords();//spuca cel file
+	////spuca cel file
 
 	if (fullscreen)
 	{
@@ -88,17 +88,23 @@ void Game::handleEvents() {
 	if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
 		isRunning = false;
 	}
-	
+	//pavzira game kt js faks
 	if (currentKeyStates[SDL_SCANCODE_F1]) {
 		paused = !paused;
 		std::cout << paused << "\n";
 	}
+	//pokaze hitboxe
 	if (currentKeyStates[SDL_SCANCODE_F3]) {
 		GameObject::showHitboxes = !GameObject::showHitboxes;
 	}
+	//togle keyboard movment
 	if (currentKeyStates[SDL_SCANCODE_F4]) {
 		keyboardMovement = !keyboardMovement;
 	}
+	//deleta use iz leaderboardov
+	if (currentKeyStates[SDL_SCANCODE_F12]) {
+		leaderboards->DeleteRecords();
+	}	
 
 	//ce je paused game se nemors premikat
 	if (paused) { return; }
@@ -213,16 +219,13 @@ void Game::update() {
 	if (deathscreen->GetVisible()) {
 		//ce je prvi gumb je respawn
 		if (deathscreen->CheckButtonClick(targetX, targetY) == 1) {
-			//std::cout << "button 2 clicked\n";
-
+			//respawn
 			deathscreen->SetVisible(false);
 			map->LoadMapLVLselect(1);
 			SpawnIcebergs();
 		}
 		//ce je drugi je titlescreen
 		else if (deathscreen->CheckButtonClick(targetX, targetY) == 2) {
-			//std::cout << "button 2 clicked\n";
-
 			titlescreen->SetVisible(true);
 		}
 		else {
@@ -407,17 +410,6 @@ void Game::render() {
 	SDL_RenderPresent(renderer);
 }
 
-void Game::clean() {
-	//std::cout << "\nscore: " << (int) player->GetScore() / cnt << "\n";
-	//Leaderboards::WriteSortedLeaderboards("leaderboard.txt", playername, score);
-
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
-	std::cout << "game cleaned\n";
-}
-
-
 void Game::SpawnIcebergs()
 {
 	LedeneGore.clear();
@@ -426,7 +418,7 @@ void Game::SpawnIcebergs()
 		Iceberg* ledenagora;
 		do {
 			//nardi nov iceberg
-			ledenagora = new Iceberg;//((rand() % 16) * 50, (rand() % 12) * 50);
+			ledenagora = new Iceberg;
 			//ledenagora->izpis();
 			//ce se spawna v del landa ga prestavi?
 		} while (map->LandCollision(ledenagora->GetIcebergRect()));
@@ -450,8 +442,7 @@ void Game::SpawnGusarji()
 			//ce se spawna v del landa ga prestavi?
 		} while (map->LandCollision(enemy->GetEnemyRect()));
 
-		Sovrazniki.push_back(enemy);
-		//Sovrazniki.emplace_back(enemy);
+		Sovrazniki.emplace_back(enemy);
 	}
 }
 
@@ -510,3 +501,12 @@ void Game::NextLevel()
 		};
 	}
 }
+
+void Game::clean() {
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
+
+	std::cout << "game cleaned\n";
+}
+
