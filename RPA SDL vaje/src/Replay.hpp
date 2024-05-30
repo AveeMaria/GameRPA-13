@@ -9,7 +9,7 @@ class Replay
 {
 private:
 	const char* filename = "replay.bin";
-	bool replayOn = true;
+	bool replayOn = false;
 
 	std::ofstream datao;
 	std::ifstream datai;
@@ -24,14 +24,13 @@ public:
 	void ReplaySave(SDL_Rect);
 	void ClearReplay();
 	//neha recordat playermovement
-	void StopReplay();
 
 	void ToggleReplay(bool ON) { replayOn = ON; }
-	bool GetReplay() { return replayOn; }//sam za slucaj nvm ce rabm
+	bool GetReplayOn() { return replayOn; }//sam za slucaj nvm ce rabm
 
 	//vrne un rectangle k ga player uzame al neki?
 	SDL_Rect GetReplayPos();
-
+	int FileLen();
 	//void Update();
 	//void Render();
 };

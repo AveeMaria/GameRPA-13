@@ -9,14 +9,53 @@ Player::Player(const char* texturesheet, float x, float y)
     ypos = y;
 }
 
+/*
+
+void Player::ReplayMode(Replay* r) {
+    while (!(destRect.w == 0 && destRect.h == 0) && r->GetReplayOn()) {
+        SDL_RenderClear(Game::renderer); // Clear the renderer
+
+        destRect = r->GetReplayPos();
+
+        if (destRect.w == 0 && destRect.h == 0) {
+            // Exit condition met (end of replay)
+            break;
+        }
+
+        SDL_Delay(5); // Delay to control replay speed
+
+        xpos = destRect.x;
+        ypos = destRect.y;
+
+        Render(); // Render player
+        Update(); // Update player state
+
+        SDL_RenderPresent(Game::renderer); // Present the renderer
+    }
+
+    // Reset rectangle size after replay ends
+    destRect.w = 50;
+    destRect.h = 50;
+    r->ClearReplay();
+}
+*/
+
+
+
 //To NE bo delal >:(
 //cel replay zaigra
 void Player::ReplayMode(Replay* r) {
-
+    //ReplayOn = true;
     //k je konc replaya returna 0 0 0 0 rectangle
-    while (!(destRect.w == 0 || destRect.h == 0)) {
+    //int numberofreplayparts = r->FileLen();
+    int i = 0;
+    int len = r->FileLen();
+    std::cout << len;
+
+    while ((!(destRect.w == 0 || destRect.h == 0)) && (i < len)) {
         SDL_RenderClear(Game::renderer);//riskiy bisky stuff
         destRect = r->GetReplayPos();
+        SDL_Delay(5);
 
         xpos = destRect.x;
         ypos = destRect.y;
@@ -28,7 +67,48 @@ void Player::ReplayMode(Replay* r) {
 
     destRect.w = 50;
     destRect.h = 50;
+    r->ClearReplay();
+    ++i;
 }
+
+
+
+/*
+
+void Player::ReplayMode(Replay* r) {
+    int len = r->FileLen();
+    std::cout << len << std::endl;
+
+    while ((!(destRect.w == 0 && destRect.h == 0)) && r->GetReplayOn()) { // Updated condition
+        SDL_RenderClear(Game::renderer); // Clear the renderer
+
+        destRect = r->GetReplayPos();
+        if (destRect.w == 0 && destRect.h == 0) { // Additional exit condition
+            break;
+        }
+
+        SDL_Delay(5); // Delay to control replay speed
+
+        xpos = destRect.x;
+        ypos = destRect.y;
+
+        Render(); // Render player
+        Update(); // Update player state
+
+        SDL_RenderPresent(Game::renderer); // Present the renderer
+    }
+
+    // Reset rectangle size after replay ends
+    destRect.w = 50;
+    destRect.h = 50;
+    r->ClearReplay();
+}
+
+*/
+
+
+
+
 
 void Player::increaseX(float x)
 {

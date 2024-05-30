@@ -16,6 +16,7 @@ private:
 
 	float speed = 1.2f;
 	
+	//bool ReplayOn = false;
 	bool immortalMode = false;
 
 	bool sui = false;

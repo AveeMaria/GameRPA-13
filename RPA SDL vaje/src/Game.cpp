@@ -78,7 +78,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	map = new Map();
 	titlescreen = new Titlescreen();
 	deathscreen = new Deathscreen();
-	
+	replay->ClearReplay();
 	SpawnIcebergs(); SpawnKitolovci();
 }
 
@@ -245,13 +245,9 @@ void Game::update() {
 		leaderboards->IzpisDatoteke();//izpise leaderboards
 		deathscreen->SetVisible(true);return;
 	}
-	//ce je ziv player
-	else {
-		replay->ReplaySave(player->GetPlayerRect());//recorda playerja not
-
-	}
-	//trentuno gameenda, drgac klice death screen
 	
+	
+	replay->ReplaySave(player->GetPlayerRect());//recorda playerja not
 	player->Update();
 	cursor->Update();
 	
