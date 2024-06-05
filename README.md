@@ -1,5 +1,5 @@
 # RPA Game
-### se ne vidimo avgusta
+## se ne vidimo avgusta
 
 ### za vse mlajse generacije k gledate tole:
 
